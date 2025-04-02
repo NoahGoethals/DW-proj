@@ -1,3 +1,4 @@
+
 import { fetchComicWalls } from './data/api-helper.mjs';
 
 let alleMuren = [];
@@ -102,12 +103,17 @@ function toonMuren(muren) {
     const li = document.createElement('li');
 
     li.innerHTML = `
-  <h3>${muur.nom_de_la_fresque || muur.naam_fresco_nl || 'Naam onbekend'}</h3>
-  <img src="${muur.image}" alt="${muur.nom_de_la_fresque || 'Afbeelding'}" width="300" />
-  <p><strong>Adres:</strong> ${muur.adresse || muur.adres || 'Onbekend adres'}</p>
-  <p><strong>Gemeente:</strong> ${muur.commune_gemeente || 'Onbekend'}</p>
-  <p><strong>Maker:</strong> ${muur.dessinateur || 'Onbekend'}</p>
-`;
+    <h3>${muur.nom_de_la_fresque || muur.nom || 'Naam onbekend'}</h3>
+    ${muur.image 
+      ? `<img src="${muur.image}" alt="${muur.nom || 'Afbeelding'}" width="300"
+           onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<p><em>Geen afbeelding beschikbaar</em></p>')">`
+      : '<p><em>Geen afbeelding beschikbaar</em></p>'}
+    <p><strong>Adres:</strong> ${muur.adresse || muur.adres || 'Onbekend adres'}</p>
+    <p><strong>Gemeente:</strong> ${muur.commune_gemeente || muur.commune || 'Onbekend'}</p>
+    <p><strong>Maker:</strong> ${muur.dessinateur || muur.illustrateur || 'Onbekend'}</p>
+  `;
+  
+
 
 
     // Favoriet-knop
