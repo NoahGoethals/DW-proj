@@ -1,7 +1,28 @@
-fetch('https://opendata.brussels.be/api/records/1.0/search/?dataset=bruxelles_parcours_bd&rows=100')
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    // Verwerk de data hier
-  })
-  .catch(error => console.error('Fout bij het ophalen van de data:', error));
+import { fetchComicWalls } from './data/api-helper.mjs';
+
+window.addEventListener('load', async () => {
+  try {
+    const stripmuren = await fetchComicWalls();
+    toonMuren(stripmuren);
+  } catch (error) {
+    document.getElementById('locatie-lijst').textContent = 'Kon de stripmuren niet laden.';
+  }
+});
+
+function toonMuren(muren) {
+  const lijst = document.getElementById('locatie-lijst');
+  lijst.innerHTML = '';
+
+  muren.forEach(item => {
+    const muur = item.fields;
+    const li = document.createElement('li');
+
+    li.innerHTML = `
+      <h3>${muur.nom || 'Naam onbekend'}</h3>
+      <p><strong>Adres:</strong> ${muur.adresse || 'Onbekend adres'}</p>
+      <p><strong>Gemeente:</strong> ${muur.commune || 'Onbekend'}</p>
+    `;
+
+    lijst.appendChild(li);
+  });
+}
