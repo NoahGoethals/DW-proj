@@ -35,4 +35,19 @@ window.addEventListener('load', () => {
     const nieuw = favorieten.filter(fav => fav.recordid !== recordid);
     localStorage.setItem('favorieten', JSON.stringify(nieuw));
   }
+  const knop = document.getElementById('thema-toggle');
+const huidigeThema = localStorage.getItem('thema') || 'licht';
+
+document.body.classList.add(huidigeThema);
+knop.textContent = huidigeThema === 'donker' ? '☀️ Licht thema' : '🌙 Donker thema';
+
+knop.addEventListener('click', () => {
+  document.body.classList.toggle('donker');
+
+  const nieuwThema = document.body.classList.contains('donker') ? 'donker' : 'licht';
+  localStorage.setItem('thema', nieuwThema);
+
+  knop.textContent = nieuwThema === 'donker' ? '☀️ Licht thema' : '🌙 Donker thema';
+});
+
   

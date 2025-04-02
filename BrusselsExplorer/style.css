@@ -1,1 +1,74 @@
-
+body.donker {
+    background-color: #2e2b2b;
+    color: #f5f5f5;
+  }
+  
+  body.donker a {
+    color: #bb86fc;
+  }
+  
+  body.donker button {
+    background-color: #333;
+    color: #312a2a;
+    border: 1px solid #666;
+  }
+  
+  
+  
+  #thema-toggle {
+    position: fixed;    
+    top: 1em;
+    right: 1em;
+    padding: 0.5em 1em;
+    background-color: #eee;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .favoriet-knop.favoriet {
+    background-color: gold;
+    color: black;
+    font-weight: bold;
+  }
+ /* Algemene knoppen in dark mode */
+body.donker button {
+    background-color: #444;
+    color: #443e3e;
+    border: 1px solid #666;
+  }
+  
+  /* Favoriet-knop standaardstijl */
+  .favoriet-knop {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 0.5em 1em;
+    border: 2px solid #999;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* 🌙 Donker thema: niet-geselecteerde favorieten */
+  body.donker .favoriet-knop {
+    background-color: #444;
+    color: #eee;
+    border: 1px solid #888;
+  }
+  
+  /* 🌙 Donker thema: wel favoriet */
+  body.donker .favoriet-knop.favoriet {
+    background-color: #fffacd;
+    color: #111;
+    border-color: #666;
+  }
+  .favoriet-knop:hover {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+li {
+  border: 1px solid #ccc;
+  padding: 1em;
+  border-radius: 10px;
+  margin-bottom: 1em;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
