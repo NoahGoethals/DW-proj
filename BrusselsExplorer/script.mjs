@@ -5,7 +5,7 @@ let alleMuren = [];
 window.addEventListener('load', async () => {
   try {
     alleMuren = await fetchComicWalls();
-    // 🏙️ Gemeente dropdown vullen
+    //  Gemeente dropdown vullen
 const gemeentes = [...new Set(alleMuren.map(item => item.fields.commune).filter(Boolean))].sort();
 
 const dropdown = document.getElementById('gemeente-filter');
@@ -22,7 +22,9 @@ gemeentes.forEach(gemeente => {
   }
 });
 
+
 function toonMuren(muren) {
+  
   const lijst = document.getElementById('locatie-lijst');
   lijst.innerHTML = '';
 
@@ -45,7 +47,7 @@ knop.addEventListener('click', () => toggleFavoriet(item));
   });
 }
 
-// 🔍 Zoekfunctie
+//  Zoekfunctie
 const zoekveld = document.getElementById('zoekveld');
 zoekveld.addEventListener('input', () => {
   const zoekterm = zoekveld.value.toLowerCase();
@@ -60,7 +62,7 @@ zoekveld.addEventListener('input', () => {
 
   toonMuren(gefilterdeMuren);
 });
-// 🔽 Gemeente filter
+//  Gemeente filter
 dropdown.addEventListener('change', () => {
     const geselecteerd = dropdown.value.toLowerCase();
   
@@ -71,7 +73,7 @@ dropdown.addEventListener('change', () => {
   
     toonMuren(geselecteerd ? gefilterd : alleMuren);
   });
-  // 🔃 Sorteerfunctie
+  //  Sorteerfunctie
 const sorteerveld = document.getElementById('sorteer-optie');
 sorteerveld.addEventListener('change', () => {
   const richting = sorteerveld.value;
