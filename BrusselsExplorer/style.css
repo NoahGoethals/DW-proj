@@ -1,22 +1,21 @@
-body.donker {
+/* 🌐 Algemene layout */
+body {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1.5em;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #ffffff;
+    color: #222;
+  }
+  
+  body.donker {
     background-color: #2e2b2b;
     color: #f5f5f5;
   }
   
-  body.donker a {
-    color: #bb86fc;
-  }
-  
-  body.donker button {
-    background-color: #333;
-    color: #312a2a;
-    border: 1px solid #666;
-  }
-  
-  
-  
+  /* 🌙 Thema-toggle knop */
   #thema-toggle {
-    position: fixed;    
+    position: fixed;
     top: 1em;
     right: 1em;
     padding: 0.5em 1em;
@@ -24,21 +23,90 @@ body.donker {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    z-index: 1000;
   }
   
-  .favoriet-knop.favoriet {
-    background-color: gold;
-    color: black;
+  body.donker #thema-toggle {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  /* 🧭 Navigatie */
+  nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    margin-bottom: 2em;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #333;
     font-weight: bold;
-  }
- /* Algemene knoppen in dark mode */
-body.donker button {
-    background-color: #444;
-    color: #443e3e;
-    border: 1px solid #666;
+    padding: 0.3em 0.8em;
+    border-radius: 5px;
+    transition: background-color 0.2s;
   }
   
-  /* Favoriet-knop standaardstijl */
+  nav a:hover {
+    background-color: #ddd;
+  }
+  
+  body.donker nav {
+    background-color: #333;
+  }
+  
+  body.donker nav a {
+    color: #bb86fc;
+  }
+  
+  body.donker nav a:hover {
+    background-color: #555;
+  }
+  
+  /* 📦 Kaarten stijl */
+  li {
+    border: 1px solid #ccc;
+    padding: 1em;
+    border-radius: 10px;
+    margin-bottom: 1em;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    background-color: #fff;
+  }
+  
+  body.donker li {
+    background-color: #3a3a3a;
+    border-color: #555;
+  }
+  
+  li img {
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* 🧠 Inputvelden & filters */
+  input, select {
+    padding: 0.6em;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    margin: 0.5em 0.5em 1em 0;
+    font-size: 1em;
+  }
+  
+  input:focus, select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  /* ⭐ Favorietenknop */
   .favoriet-knop {
     background-color: #f0f0f0;
     color: #333;
@@ -46,34 +114,34 @@ body.donker button {
     border: 2px solid #999;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
   }
   
-  /* 🌙 Donker thema: niet-geselecteerde favorieten */
+  .favoriet-knop.favoriet {
+    background-color: gold;
+    color: black;
+    font-weight: bold;
+  }
+  
+  .favoriet-knop:hover {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+  
   body.donker .favoriet-knop {
     background-color: #444;
     color: #eee;
     border: 1px solid #888;
   }
   
-  /* 🌙 Donker thema: wel favoriet */
   body.donker .favoriet-knop.favoriet {
     background-color: #fffacd;
     color: #111;
     border-color: #666;
   }
-  .favoriet-knop:hover {
-    opacity: 0.85;
-    transform: scale(1.02);
-  }
-li {
-  border: 1px solid #ccc;
-  padding: 1em;
-  border-radius: 10px;
-  margin-bottom: 1em;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-}
-
-.verwijder-knop {
+  
+  /* 🗑️ Verwijderknop */
+  .verwijder-knop {
     background-color: #ffdddd;
     color: #900;
     border: 1px solid #c00;
@@ -81,10 +149,12 @@ li {
     border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
   }
   
   .verwijder-knop:hover {
     background-color: #ffcccc;
+    transform: scale(1.05);
   }
   
   body.donker .verwijder-knop {
@@ -95,5 +165,22 @@ li {
   
   body.donker .verwijder-knop:hover {
     background-color: #773333;
+  }
+  footer {
+    text-align: center;
+    padding: 2em 1em;
+    font-size: 0.9em;
+    color: #555;
+    border-top: 1px solid #ccc;
+    margin-top: 3em;
+  }
+  
+  footer p {
+    margin: 0.3em 0;
+  }
+  
+  body.donker footer {
+    color: #aaa;
+    border-color: #444;
   }
   

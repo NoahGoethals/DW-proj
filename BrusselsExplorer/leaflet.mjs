@@ -13,8 +13,10 @@ window.addEventListener('load', async () => {
     knop.textContent = nieuwThema === 'donker' ? '☀️ Licht thema' : '🌙 Donker thema';
   });
 
+  // Map initialiseren
   const map = L.map('map').setView([50.85, 4.35], 13);
 
+  // Basislaag toevoegen
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
@@ -23,18 +25,21 @@ window.addEventListener('load', async () => {
     const muren = await fetchComicWalls();
 
     muren.forEach(muur => {
-      const coords = muur.fields.coordinates;
+      // Gebruik expliciet geometry.coordinates uit API (longitude, latitude)
+      const coords = muur.geometry?.coordinates || muur.fields.coordinates;
       if (coords && coords.length === 2) {
-        const marker = L.marker([coords[0], coords[1]]).addTo(map);
+        const [lng, lat] = coords;  // LET OP: volgorde omdraaien naar [lat, lng]!
+        const marker = L.marker([lat, lng]).addTo(map);
+
         marker.bindPopup(`
           <strong>${muur.fields.nom_de_la_fresque || muur.fields.nom || 'Onbekend'}</strong><br>
-          ${muur.fields.adresse || 'Geen adres bekend'}<br>
-          ${muur.fields.commune || 'Geen gemeente bekend'}
+          ${muur.fields.adresse || muur.fields.adres || 'Geen adres bekend'}<br>
+          ${muur.fields.commune_gemeente || muur.fields.commune || 'Geen gemeente bekend'}
         `);
       }
     });
   } catch (error) {
-    alert('Kon locaties niet laden op de kaart.');
+    alert('Fout bij laden van markers: ' + error.message);
     console.error(error);
   }
 });
