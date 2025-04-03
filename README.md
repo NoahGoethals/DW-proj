@@ -85,6 +85,20 @@ Door de data goed te filteren en fallbackwaarden of conditional rendering te geb
 
 ![Donker Thema](./img/donker.png)
 
+## Gebruikte bronnen
+
+1. [opendata.brussels – Comic books route dataset](https://opendata.brussels.be/explore/dataset/bruxelles_parcours_bd/information/)  
+   ➤ Gebruikt als primaire databron voor de stripmuren in Brussel.
+
+2. [MDN Web Docs – JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)  
+   ➤ Gebruikt voor referentie bij moderne JavaScript-methodes zoals `forEach()`, `fetch()`, `addEventListener()`, etc.
+
+3. [Leaflet.js Documentation](https://leafletjs.com/reference.html)  
+   ➤ Gebruikt voor het toevoegen van een interactieve kaartweergave van stripmuren.
+
+4. ChatGPT – AI-assistent  
+   ➤ Ingezet voor hulp bij debuggen, uitleg van technieken (DOM, fetch, localStorage), en structuur van deze README.
+
 ## Installatiehandleiding
 
 1. **Clone dit project**
