@@ -4,7 +4,7 @@ import { fetchComicWalls } from './data/api-helper.mjs';
 let alleMuren = [];
 
 window.addEventListener('load', async () => {
-  // 🌗 Thema herstellen bij laden
+  //  Thema herstellen bij laden
   const knop = document.getElementById('thema-toggle');
   const huidigeThema = localStorage.getItem('thema') || 'licht';
   document.body.classList.add(huidigeThema);
@@ -17,62 +17,66 @@ window.addEventListener('load', async () => {
       knop.textContent = nieuwThema === 'donker' ? '☀️ Licht thema' : '🌙 Donker thema';
     });
   }
+  
 
-  // 🌍 Data ophalen en tonen
+  //  Data ophalen en tonen
   try {
     alleMuren = await fetchComicWalls();
 
-    const dropdown = document.getElementById('gemeente-filter');
-    if (dropdown) {
-      // Gemeente dropdown vullen
-      const gemeentes = [...new Set(alleMuren.map(item => item.fields.commune).filter(Boolean))].sort();
-      gemeentes.forEach(gemeente => {
-        const optie = document.createElement('option');
-        optie.value = gemeente;
-        optie.textContent = gemeente;
-        dropdown.appendChild(optie);
-      });
-
-      dropdown.addEventListener('change', () => {
-        const geselecteerd = dropdown.value.toLowerCase();
-        const gefilterd = alleMuren.filter(item =>
-          (item.fields.commune || '').toLowerCase().includes(geselecteerd)
-        );
-        toonMuren(geselecteerd ? gefilterd : alleMuren);
-      });
-    }
-
+   
     const sorteerveld = document.getElementById('sorteer-optie');
+
     if (sorteerveld) {
       sorteerveld.addEventListener('change', () => {
-        const richting = sorteerveld.value;
+        const optie = sorteerveld.value;
         let gesorteerdeMuren = [...alleMuren];
-
-        if (richting === 'az') {
-          gesorteerdeMuren.sort((a, b) =>
-            (a.fields.nom || '').toLowerCase().localeCompare((b.fields.nom || '').toLowerCase())
-          );
-        } else if (richting === 'za') {
-          gesorteerdeMuren.sort((a, b) =>
-            (b.fields.nom || '').toLowerCase().localeCompare((a.fields.nom || '').toLowerCase())
-          );
-        }
-
+    
+        gesorteerdeMuren.sort((a, b) => {
+          const naamA = (a.fields.nom_de_la_fresque || a.fields.nom || '').toLowerCase();
+          const naamB = (b.fields.nom_de_la_fresque || b.fields.nom || '').toLowerCase();
+    
+          if (optie === 'az') {
+            return naamA.localeCompare(naamB);
+          } else if (optie === 'za') {
+            return naamB.localeCompare(naamA);
+          } else {
+            return 0; // geen specifieke sortering
+          }
+        });
+    
         toonMuren(gesorteerdeMuren);
       });
     }
+    
 
     const zoekveld = document.getElementById('zoekveld');
-    if (zoekveld) {
-      zoekveld.addEventListener('input', () => {
-        const zoekterm = zoekveld.value.toLowerCase();
-        const gefilterd = alleMuren.filter(item => {
-          const { nom = '', commune = '' } = item.fields;
-          return nom.toLowerCase().includes(zoekterm) || commune.toLowerCase().includes(zoekterm);
-        });
-        toonMuren(gefilterd);
-      });
-    }
+if (zoekveld) {
+  zoekveld.addEventListener('input', () => {
+    const zoekterm = zoekveld.value.toLowerCase().trim();
+
+    const gefilterd = alleMuren.filter(item => {
+      const {
+        nom_de_la_fresque = '',
+        nom = '',
+        commune = '',
+        adresse = '',
+        dessinateur = '',
+        illustrateur = ''
+      } = item.fields;
+
+      return (
+        nom.toLowerCase().includes(zoekterm) ||
+        nom_de_la_fresque.toLowerCase().includes(zoekterm) ||
+        commune.toLowerCase().includes(zoekterm) ||
+        adresse.toLowerCase().includes(zoekterm) ||
+        dessinateur.toLowerCase().includes(zoekterm) ||
+        illustrateur.toLowerCase().includes(zoekterm)
+      );
+    });
+
+    toonMuren(gefilterd);
+  });
+}
 
     toonMuren(alleMuren);
   } catch (error) {
