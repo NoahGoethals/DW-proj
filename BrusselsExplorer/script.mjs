@@ -1,4 +1,4 @@
-
+// Importeer de functie om stripmuren op te halen via de API
 import { fetchComicWalls } from './data/api-helper.mjs';
 
 let alleMuren = [];
@@ -23,7 +23,8 @@ window.addEventListener('load', async () => {
   try {
     alleMuren = await fetchComicWalls();
 
-   
+       // Sorteerveld opzoeken
+
     const sorteerveld = document.getElementById('sorteer-optie');
 
     if (sorteerveld) {
@@ -48,6 +49,7 @@ window.addEventListener('load', async () => {
       });
     }
     
+        // Filter muren op naam, gemeente, adres of maker
 
     const zoekveld = document.getElementById('zoekveld');
 if (zoekveld) {
@@ -73,10 +75,12 @@ if (zoekveld) {
         illustrateur.toLowerCase().includes(zoekterm)
       );
     });
+        // Toon gefilterde resultaten
 
     toonMuren(gefilterd);
   });
 }
+    // Toon de originele lijst bij opstart
 
     toonMuren(alleMuren);
   } catch (error) {
@@ -105,6 +109,8 @@ function toonMuren(muren) {
   muren.forEach(item => {
     const muur = item.fields;
     const li = document.createElement('li');
+
+        // Vul het element met de muurinfo
 
     li.innerHTML = `
     <h3>${muur.nom_de_la_fresque || muur.nom || 'Naam onbekend'}</h3>
@@ -141,6 +147,7 @@ function toonMuren(muren) {
     lijst.appendChild(li);
   });
 }
+// Functie om een favoriet toe te voegen/verwijderen in localStorage
 
 function toggleFavoriet(item) {
   const favorieten = JSON.parse(localStorage.getItem('favorieten')) || [];

@@ -1,3 +1,4 @@
+// Importeer de functie om stripmuren op te halen
 import { fetchComicWalls } from './data/api-helper.mjs';
 
 window.addEventListener('load', async () => {
@@ -5,6 +6,8 @@ window.addEventListener('load', async () => {
   const huidigeThema = localStorage.getItem('thema') || 'licht';
   document.body.classList.add(huidigeThema);
   knop.textContent = huidigeThema === 'donker' ? '☀️ Licht thema' : '🌙 Donker thema';
+
+  // 🌙 Thema herstellen bij laden
 
   knop.addEventListener('click', () => {
     document.body.classList.toggle('donker');
@@ -25,10 +28,10 @@ window.addEventListener('load', async () => {
     const muren = await fetchComicWalls();
 
     muren.forEach(muur => {
-      // Gebruik expliciet geometry.coordinates uit API (longitude, latitude)
+      // Gebruik  geometry.coordinates uit API (longitude, latitude)
       const coords = muur.geometry?.coordinates || muur.fields.coordinates;
       if (coords && coords.length === 2) {
-        const [lng, lat] = coords;  // LET OP: volgorde omdraaien naar [lat, lng]!
+        const [lng, lat] = coords;  // omdraaien naar [lat, lng]!
         const marker = L.marker([lat, lng]).addTo(map);
 
         marker.bindPopup(`

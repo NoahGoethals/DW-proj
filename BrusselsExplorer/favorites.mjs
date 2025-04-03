@@ -2,6 +2,8 @@ window.addEventListener('load', () => {
     const lijst = document.getElementById('favorieten-lijst');
     lijst.innerHTML = '';
   
+      // Haal favorieten op uit localStorage of start met lege array
+
     const favorieten = JSON.parse(localStorage.getItem('favorieten')) || [];
   
     if (favorieten.length === 0) {
@@ -48,6 +50,8 @@ const huidigeThema = localStorage.getItem('thema') || 'licht';
 
 document.body.classList.add(huidigeThema);
 knop.textContent = huidigeThema === 'donker' ? '☀️ Licht thema' : '🌙 Donker thema';
+
+// Eventlistener om thema te wisselen
 
 knop.addEventListener('click', () => {
   document.body.classList.toggle('donker');
